@@ -17,3 +17,5 @@ packages/
 
 # NUnit test results
 TestResult.xml
+
+InternalDocs/
