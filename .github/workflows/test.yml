@@ -28,9 +28,9 @@ jobs:
           curl --fail --location --silent --show-error https://api.nuget.org/v3-flatcontainer/nunit/3.14.0/nunit.3.14.0.nupkg --output /tmp/nunit.3.14.0.nupkg
           curl --fail --location --silent --show-error https://api.nuget.org/v3-flatcontainer/nunitlite/3.14.0/nunitlite.3.14.0.nupkg --output /tmp/nunitlite.3.14.0.nupkg
           curl --fail --location --silent --show-error https://api.nuget.org/v3-flatcontainer/nunit3testadapter/4.3.1/nunit3testadapter.4.3.1.nupkg --output /tmp/nunit3testadapter.4.3.1.nupkg
-          unzip --quiet /tmp/nunit.3.14.0.nupkg -d packages/NUnit.3.14.0
-          unzip --quiet /tmp/nunitlite.3.14.0.nupkg -d packages/NUnitLite.3.14.0
-          unzip --quiet /tmp/nunit3testadapter.4.3.1.nupkg -d packages/NUnit3TestAdapter.4.3.1
+          unzip -q /tmp/nunit.3.14.0.nupkg -d packages/NUnit.3.14.0
+          unzip -q /tmp/nunitlite.3.14.0.nupkg -d packages/NUnitLite.3.14.0
+          unzip -q /tmp/nunit3testadapter.4.3.1.nupkg -d packages/NUnit3TestAdapter.4.3.1
 
       - name: Build test project
         run: xbuild Tests/SimpleX.Tests.csproj /target:Rebuild /property:Configuration=Debug /property:Platform=x86
