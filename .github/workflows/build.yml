@@ -11,15 +11,16 @@ permissions:
 jobs:
   build:
     name: Build application
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Add MSBuild to PATH
-        uses: microsoft/setup-msbuild@v3
+      - name: Install Mono
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes mono-devel
 
       - name: Build application
-        shell: pwsh
-        run: msbuild SimpleX.csproj /target:Rebuild /property:Configuration=Debug /property:Platform=x86 /m
+        run: xbuild SimpleX.csproj /target:Rebuild /property:Configuration=Debug /property:Platform=x86

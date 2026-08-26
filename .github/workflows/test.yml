@@ -11,27 +11,29 @@ permissions:
 jobs:
   test:
     name: Run NUnit tests
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Add MSBuild to PATH
-        uses: microsoft/setup-msbuild@v3
+      - name: Install Mono and package tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes mono-devel curl unzip
 
-      - name: Restore NuGet packages
-        shell: pwsh
-        run: nuget restore SimpleX.sln
+      - name: Restore NUnit packages
+        run: |
+          mkdir --parents packages
+          curl --fail --location --silent --show-error https://api.nuget.org/v3-flatcontainer/nunit/3.14.0/nunit.3.14.0.nupkg --output /tmp/nunit.3.14.0.nupkg
+          curl --fail --location --silent --show-error https://api.nuget.org/v3-flatcontainer/nunitlite/3.14.0/nunitlite.3.14.0.nupkg --output /tmp/nunitlite.3.14.0.nupkg
+          curl --fail --location --silent --show-error https://api.nuget.org/v3-flatcontainer/nunit3testadapter/4.3.1/nunit3testadapter.4.3.1.nupkg --output /tmp/nunit3testadapter.4.3.1.nupkg
+          unzip --quiet /tmp/nunit.3.14.0.nupkg -d packages/NUnit.3.14.0
+          unzip --quiet /tmp/nunitlite.3.14.0.nupkg -d packages/NUnitLite.3.14.0
+          unzip --quiet /tmp/nunit3testadapter.4.3.1.nupkg -d packages/NUnit3TestAdapter.4.3.1
 
       - name: Build test project
-        shell: pwsh
-        run: msbuild Tests\SimpleX.Tests.csproj /target:Rebuild /property:Configuration=Debug /property:Platform=x86 /m
+        run: xbuild Tests/SimpleX.Tests.csproj /target:Rebuild /property:Configuration=Debug /property:Platform=x86
 
       - name: Run NUnit tests
-        shell: pwsh
-        run: |
-          & .\Tests\bin\Debug\SimpleX.Tests.exe --labels=All --result=TestResult.xml
-          if ($LASTEXITCODE -ne 0) {
-            exit $LASTEXITCODE
-          }
+        run: mono Tests/bin/Debug/SimpleX.Tests.exe --labels=All --result=TestResult.xml
