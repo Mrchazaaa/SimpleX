@@ -1,0 +1,34 @@
+name: Tests
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Run NUnit tests
+    runs-on: windows-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Restore NuGet packages
+        shell: pwsh
+        run: nuget restore SimpleX.sln
+
+      - name: Build test project
+        shell: pwsh
+        run: msbuild Tests\SimpleX.Tests.csproj /target:Rebuild /property:Configuration=Debug /property:Platform=x86 /m
+
+      - name: Run NUnit tests
+        shell: pwsh
+        run: |
+          & .\Tests\bin\Debug\SimpleX.Tests.exe --labels=All --result=TestResult.xml
+          if ($LASTEXITCODE -ne 0) {
+            exit $LASTEXITCODE
+          }
