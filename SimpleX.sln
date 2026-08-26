@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2013 for Windows Desktop
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleX", "SimpleX.csproj", "{9D110D2A-FC2B-4670-969F-76945FF3C85A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleX.Tests", "Tests\SimpleX.Tests.csproj", "{E14BCE6B-FD0F-4F9C-B023-AE51E053E691}"
+EndProject
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9D110D2A-FC2B-4670-969F-76945FF3C85A}.Debug|x86.ActiveCfg = Debug|x86
+		{9D110D2A-FC2B-4670-969F-76945FF3C85A}.Debug|x86.Build.0 = Debug|x86
+		{9D110D2A-FC2B-4670-969F-76945FF3C85A}.Release|x86.ActiveCfg = Release|x86
+		{9D110D2A-FC2B-4670-969F-76945FF3C85A}.Release|x86.Build.0 = Release|x86
+		{E14BCE6B-FD0F-4F9C-B023-AE51E053E691}.Debug|x86.ActiveCfg = Debug|x86
+		{E14BCE6B-FD0F-4F9C-B023-AE51E053E691}.Debug|x86.Build.0 = Debug|x86
+		{E14BCE6B-FD0F-4F9C-B023-AE51E053E691}.Release|x86.ActiveCfg = Release|x86
+		{E14BCE6B-FD0F-4F9C-B023-AE51E053E691}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

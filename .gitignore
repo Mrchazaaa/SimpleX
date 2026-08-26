@@ -1,0 +1,19 @@
+# Visual Studio user and workspace settings
+.vs/
+*.suo
+*.user
+
+# Build output
+[Bb]in/
+[Oo]bj/
+*.exe
+*.pdb
+*.mdb
+*.vshost.exe
+*.vshost.exe.manifest
+
+# NuGet restore output
+packages/
+
+# NUnit test results
+TestResult.xml
